@@ -1,0 +1,8 @@
+{
+  "name": "tube-radar",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test/approach.mjs"
+  }
+}

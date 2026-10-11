@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tube Radar</title>
+  <meta name="description" content="A green radar of incoming London Underground trains. Range is minutes to arrival. Powered by TfL Open Data." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <span class="rec" aria-hidden="true"></span>
+        <div>
+          <h1>TUBE RADAR</h1>
+          <p class="tag">INCOMING TRAINS · TIME TO ARRIVAL</p>
+        </div>
+      </div>
+      <form id="search-form" class="search" role="search" autocomplete="off">
+        <label class="search-label" for="station-input">STATION</label>
+        <input id="station-input" type="search" placeholder="Search a tube station" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-controls="results" aria-autocomplete="list" />
+        <ul id="results" class="results" role="listbox" hidden></ul>
+      </form>
+      <div class="station-readout">
+        <div id="station-name" class="station-name">ACQUIRING…</div>
+        <div id="station-meta" class="station-meta"></div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <section class="scope-panel" aria-label="Radar scope">
+        <div class="scope-wrap" id="scope-wrap">
+          <canvas id="scope" aria-hidden="true"></canvas>
+          <div class="scanlines"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="scope-controls">
+          <div class="ranges" role="group" aria-label="Range in minutes">
+            <span class="ctrl-label">RANGE</span>
+            <button type="button" data-range="auto" aria-pressed="true">AUTO</button>
+            <button type="button" data-range="300">5m</button>
+            <button type="button" data-range="600">10m</button>
+            <button type="button" data-range="1200">20m</button>
+            <button type="button" data-range="1800">30m</button>
+          </div>
+          <p class="legend">Each marker is a train. Distance from the centre is minutes to arrival.<br>Only the closest train is labelled. Click any train to show its destination.</p>
+        </div>
+      </section>
+
+      <aside class="contacts" aria-label="Incoming trains">
+        <header class="contacts-head">
+          <h2>CONTACTS</h2>
+          <span id="contact-count">—</span>
+        </header>
+        <div class="chips" id="chips"></div>
+        <ol id="contact-list"></ol>
+      </aside>
+    </main>
+
+    <footer class="bottom">
+      <div class="status-actions">
+        <span id="status" role="status">STANDBY</span>
+        <button type="button" id="refresh" class="text-btn">REFRESH</button>
+      </div>
+      <span class="attrib">Powered by <a href="https://tfl.gov.uk/info-for/open-data-users/" target="_blank" rel="noreferrer">TfL Open Data</a></span>
+    </footer>
+  </div>
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
